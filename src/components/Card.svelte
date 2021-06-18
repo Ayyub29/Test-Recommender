@@ -1,5 +1,15 @@
 <script lang="ts">
-    export let title, imageDesc, imageSource, description, v;
+    export let title, imageDesc, imageSource, description, v, i;
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+    function handleClick() {
+      v += 1;
+      dispatch('message', {
+			  value: v,
+        iter:i
+		  });
+    }
 </script>
 
 <main>
@@ -11,7 +21,7 @@
     <div class="text">
         <p class="desc">{description}</p>
     </div>
-    <button class="button">Click Here ({v}) </button>
+    <button on:click="{handleClick}" class="button">Click Here ({v}) </button>
   </div>
 </main>
 

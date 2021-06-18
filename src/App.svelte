@@ -13,12 +13,10 @@
 		{ t: 'Domba Berbulu', a:'Domba',  d: 'Serigala berbulu Domba tapi ga ganteng', s:'https://cdn1-production-images-kly.akamaized.net/54Je29zEa1o8j0K1XilvY23JdA0=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1632750/original/007472200_1498216544-Domba6.jpg', v:0},
 		{ t: 'Domba Jahil', a:'Domba',  d: 'Bukan Shaun the sheep tapi emang jahil aja', s:'https://cdn.pixabay.com/photo/2017/08/03/18/49/wolf-in-sheeps-clothing-2577813_1280.jpg', v:0},
 	];
-	export let val = 0;
-	
-	function handleCount(i) {
-		cards[i].v = val;
-		cards = cards.sort(function(a, b){return b.v - a.v})
-		console.log(cards);
+
+	function handleCount(event) {
+		cards[event.detail.iter].v = event.detail.value;
+		cards = cards.sort(function(a, b){return b.v - a.v});
 	}
 </script>
 
@@ -26,7 +24,7 @@
 
 <main>
 	{#each cards as { t, s, d, v, a }, i}
-		<Card on:submit={handleCount(i)} bind:title={t} imageDesc={a} imageSource={s} description={d} v={v}/>
+		<Card on:message={handleCount} bind:title={t} imageDesc={a} imageSource={s} description={d} v={v} i={i}/>
 	{/each}
 </main>
 
